@@ -1107,19 +1107,13 @@ let output = input => {
   let formatted = input.trim().split("\n").map(Number);
   let steps = 0;
   let currentIdx = 0;
-  let running = true;
 
-  while (running) {
+  while (currentIdx < formatted.length) {
     let val = formatted[currentIdx];
 
     formatted[currentIdx] = val + 1;
     currentIdx += val;
-
     steps++;
-
-    if (currentIdx > formatted.length - 1) {
-      running = false;
-    }
   }
 
   return steps;
@@ -1134,28 +1128,14 @@ let output2 = input => {
   let formatted = input.trim().split("\n").map(Number);
   let steps = 0;
   let currentIdx = 0;
-  let running = true;
 
-  while (running) {
+  while (currentIdx < formatted.length) {
     let val = formatted[currentIdx];
 
-    if (val >= 3) {
-      formatted[currentIdx] = val - 1;
-    } else {
-      formatted[currentIdx] = val + 1;
-
-    }
-
+    formatted[currentIdx] = val + (val >= 3 ? -1 : 1)
     currentIdx += val;
-
     steps++;
-
-    if (currentIdx > formatted.length - 1) {
-      running = false;
-    }
   }
 
   return steps;
 }
-
-console.log(output2(input))
