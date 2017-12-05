@@ -517,8 +517,7 @@ lpyubo dylpfb iehwug decj ntidy cuygyg lalkb iutu oxgm imn
 // === Part 1 ===
 // ==============
 
-let output = input.split('\n')
-  .filter(item => item !== '')
+let output = input.trim().split('\n')
   .map(item => item.split(' '))
   .filter(arr => (new Set(arr)).size === arr.length)
   .length;
@@ -527,8 +526,7 @@ let output = input.split('\n')
 // === Part 2 ===
 // ==============
 
-let output2 = input.split('\n')
-  .filter(item => item !== '')
+let output2 = input.trim().split('\n')
   .map(item => item.split(' ').map(word => word.split('').sort().join()))
   .filter(arr => (new Set(arr)).size === arr.length)
   .length;

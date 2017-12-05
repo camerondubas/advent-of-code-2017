@@ -21,14 +21,13 @@ let input = `
 // === Part 1 ===
 // ==============
 
-let output = input.split('\n')
-  .filter(item => item !== '')
+let output = input.trim().split('\n')
   .map(item => item.split('\t'))
   .map(row => {
     let smallest = 99999999999999999;
     let largest = 0;
-    row.forEach(col => {
-      col = Number(col);
+
+    row.map(Number).forEach(col => {
       if (col < smallest) {
         smallest = col
       }
@@ -36,8 +35,8 @@ let output = input.split('\n')
       if (col > largest) {
         largest = col;
       }
-        return largest - smallest;
     })
+    return largest - smallest;
   })
   .reduce((prev, cur) => prev + cur, 0);
 
@@ -46,8 +45,7 @@ let output = input.split('\n')
 // === Part 2 ===
 // ==============
 
-let output2 = input.split('\n')
-  .filter(item => item !== '')
+let output2 = input.trim().split('\n')
   .map(item => item.split('\t'))
   .map(row => {
     let arr = []
@@ -62,5 +60,3 @@ let output2 = input.split('\n')
     return arr.reduce((prev, cur) => prev + (cur) ,0);
   })
   .reduce((prev, cur) => prev + cur, 0);
-
-  console.log(output2);

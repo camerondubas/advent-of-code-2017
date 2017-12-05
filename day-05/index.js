@@ -1104,7 +1104,7 @@ let input = `
 // ==============
 
 let output = input => {
-  let formatted = input.split('\n').filter(item => item !== '').map(item => Number(item));
+  let formatted = input.trim().split("\n").map(Number);
   let steps = 0;
   let currentIdx = 0;
   let running = true;
@@ -1131,7 +1131,7 @@ let output = input => {
 // ==============
 
 let output2 = input => {
-  let formatted = input.split('\n').filter(item => item !== '').map(item => Number(item));
+  let formatted = input.trim().split("\n").map(Number);
   let steps = 0;
   let currentIdx = 0;
   let running = true;
@@ -1158,3 +1158,4 @@ let output2 = input => {
   return steps;
 }
 
+console.log(output2(input))
