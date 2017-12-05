@@ -8,3 +8,4 @@ Advent of Code is a series of small programming puzzles for a variety of skill l
 - ★★ [Day 2: Corruption Checksum](/day-02)
 - ★☆ [Day 3: Spiral Memory](/day-03)
 - ★★ [Day 4: High-Entropy Passphrases](/day-04)
+- ★★ [Day 5: A Maze of Twisty Trampolines, All Alike](/day-05)
