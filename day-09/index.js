@@ -5,79 +5,87 @@ let input = `{{{{{{<e<{!i!>},<oe'!><!}}"ao,o>},{{},<!!!>e}"!!!!!>!}!>,<",!}!>},<
 // === Part 1 ===
 // ==============
 
-let nestLevel = 0;
-let isGarbage = false;
-let skipNext = false;
-let count = 0;
-let scores = [];
-
-let output = input.split('').forEach(char => {
-  if (skipNext) {
-    skipNext = false;
-    return false;
+let output = input.split('').reduce((state, char) => {
+  if (state.skipNext) {
+    state.skipNext = false;
+    return state;
   }
 
-
-  if (char === '!') {
-    skipNext = true;
-  } else if (char === '<') {
-    isGarbage = true;
-  } else if (char === '>') {
-    isGarbage = false
+  switch (char) {
+    case '!':
+    state.skipNext = true;
+      break;
+    case '<':
+    state.isGarbage = true;
+      break;
+    case '>':
+    state.isGarbage = false;
+      break;
+    case '{':
+    state.nestLevel += state.isGarbage ? 0 : 1
+      break;
+    case '}':
+      if (!state.isGarbage) {
+        state.scores = [...state.scores, state.nestLevel];
+        state.nestLevel--;
+      }
+      break;
+    default:
+      break;
   }
 
-  if (!isGarbage) {
-    if (char === '{') {
-      nestLevel++;
-    }
-
-    if (char === '}') {
-      scores.push(nestLevel);
-      nestLevel--;
-    }
-  }
-});
-
+  return state;
+}, {
+  nestLevel: 0,
+  isGarbage: false,
+  skipNext: false,
+  scores: []
+}).scores.reduce((prev, current) => prev + current, 0);
 
 // ==============
 // === Part 2 ===
 // ==============
 
-
-let nestLevel = 0;
-let isGarbage = false;
-let skipNext = false;
-let count = 0;
-let scores = [];
-
-let output = input.split('').forEach(char => {
-  if (skipNext) {
-    skipNext = false;
-    return false;
+let output2 = input.split('').reduce((state, char) => {
+  if (state.skipNext) {
+    state.skipNext = false;
+    return state;
   }
 
-  if (isGarbage) {
-    count++
+  if (state.isGarbage) {
+    state.count++;
   }
 
-  if (char === '!') {
-    count--;
-    skipNext = true;
-  } else if (char === '<') {
-    isGarbage = true;
-  } else if (char === '>') {
-    count--;
-    isGarbage = false
+  switch (char) {
+    case '!':
+    state.count--;
+    state.skipNext = true;
+      break;
+    case '<':
+    state.isGarbage = true;
+      break;
+    case '>':
+    state.count--;
+    state.isGarbage = false;
+      break;
+    case '{':
+    state.nestLevel += state.isGarbage ? 0 : 1
+      break;
+    case '}':
+      if (!state.isGarbage) {
+        state.scores = [...state.scores, state.nestLevel];
+        state.nestLevel--;
+      }
+      break;
+    default:
+      break;
   }
 
-  if (!isGarbage) {
-    if (char === '{') {
-      nestLevel++;
-    }
-
-    if (char === '}') {
-      scores.push(nestLevel);
-      nestLevel--;
-    }
-  }
-});
+  return state;
+}, {
+  nestLevel: 0,
+  isGarbage: false,
+  skipNext: false,
+  count: false,
+  scores: [],
+}).count;
